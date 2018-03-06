@@ -12,12 +12,11 @@ class QuotesbotToDataset(object):
     def __init__(self):
         self.apify_client = ApifyClient()
         
-    @classmethod
-    def from_crawler(cls, crawler):
-        print('initializing #############################################################################')
-        return cls()
+    #@classmethod
+    #def from_crawler(cls, crawler):
+    #    print('initializing #############################################################################')
+    #    return cls()
 
     def process_item(self, item, spider):
-        print('############################################')
         self.apify_client.pushRecords( {'data': item} )
         return item
