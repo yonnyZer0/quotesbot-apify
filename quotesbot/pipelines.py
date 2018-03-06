@@ -19,5 +19,5 @@ class QuotesbotToDataset(object):
 
     def process_item(self, item, spider):
         print('############################################')
-        self.apify_client.pushRecords( {data: item.__dict__['_values']} )
+        self.apify_client.pushRecords( {data: item.__dict__['values']} )
         return item
