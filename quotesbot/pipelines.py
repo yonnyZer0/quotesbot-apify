@@ -9,8 +9,10 @@ from py2_apify import ApifyClient
 
 class QuotesbotPipeline(object):
     
-    def def __init__(self, APIFY_TOKEN):
+    def __init__(self, APIFY_TOKEN):
         self.apify_client = ApifyClient()
+        
+    
 
     def process_item(self, item, spider):
         self.apify_client.pushRecords( {data: item.__dict__['_values']} )
