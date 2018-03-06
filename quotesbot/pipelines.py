@@ -14,8 +14,7 @@ class QuotesbotPipeline(object):
         
     @classmethod
     def from_crawler(cls, crawler):
-    
-        print('initializing ')
+        print('initializing #############################################################################')
         return cls()
 
     def process_item(self, item, spider):
