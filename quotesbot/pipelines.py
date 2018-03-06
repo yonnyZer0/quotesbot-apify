@@ -7,7 +7,7 @@
 
 from py2_apify import ApifyClient
 
-class QuotesbotPipeline(object):
+class QuotesbotToDataset(object):
     
     def __init__(self):
         self.apify_client = ApifyClient()
