@@ -18,5 +18,6 @@ class QuotesbotPipeline(object):
         return cls()
 
     def process_item(self, item, spider):
+        print('############################################')
         self.apify_client.pushRecords( {data: item.__dict__['_values']} )
         return item
