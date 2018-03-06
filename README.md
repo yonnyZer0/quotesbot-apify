@@ -1,9 +1,5 @@
 # This version is modified for simple integration with Apify Datasets by modifying "pipelines.py" file.
 
-class QuotesbotPipeline(object):
-    def process_item(self, item, spider):
-        apify_client.pushRecords( {data: item.__dict__['_values']} ) # simple item pushing to Apify Actor default dataset for actual run
-        return item
 
 # QuotesBot
 This is a Scrapy project to scrape quotes from famous people from http://quotes.toscrape.com ([github repo](https://github.com/scrapinghub/spidyquotes)).
