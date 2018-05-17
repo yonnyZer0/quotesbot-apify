@@ -13,5 +13,5 @@ class QuotesbotToDataset(object):
         self.apify_client = ApifyClient()
 
     def process_item(self, item, spider):
-        self.apify_client.pushRecords( {'data': item} )
+        self.apify_client.pushData( {'data': item} )
         return item
