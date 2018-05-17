@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-import urllib2 as u2 # FOR PYTHON3+ import urllib.request as u2
+import urllib.request as u2 #import urllib2 as u2 # FOR PYTHON3+ import urllib.request as u2
 import os, json, sys
 from time import sleep
 
