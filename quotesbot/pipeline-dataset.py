@@ -20,8 +20,7 @@ class QuotesbotToDataset(object):
     def process_item(self, item, spider):
         self.items_to_push.append( item )
         if len( self.items_to_push ) == self.chunk_size:
-            self.pushData_chunk()
-            
+            self.pushData_chunk() 
         return item
     
     def close_spider(self, spider):
