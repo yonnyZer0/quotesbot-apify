@@ -27,7 +27,7 @@ class QuotesbotToDataset(object):
     def close_spider(self, spider):
         self.pushData_chunk()
     
-    def chunk_pushData(self):
+    def pushData_chunk(self):
         self.apify_client.pushData( {'data': self.items_to_push} )
         self.items_to_push = []
         
