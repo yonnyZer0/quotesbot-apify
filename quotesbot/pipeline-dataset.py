@@ -10,7 +10,7 @@ import os, sys
 
 class QuotesbotToDataset(object):
     
-    def open_spider(self, spider):
+    def __init__(self):
         self.apify_client = ApifyClient()
         print( 'events url:' , self.apify_client.options["ACTOR_EVENTS_WS_URL"] )
         self.items_to_push = []
