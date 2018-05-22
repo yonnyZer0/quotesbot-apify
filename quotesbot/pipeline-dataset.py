@@ -22,7 +22,7 @@ class QuotesbotToDataset(object):
 
     def process_item(self, item, spider):
         self.items_to_push.append( item )
-        print( self.apify_client['ACTOR_EVENTS_WS_URL'] )
+        print( self.apify_client.options['ACTOR_EVENTS_WS_URL'] )
         if len( self.items_to_push ) == self.chunk_size:
             print('_____________________________________________')
             print()
