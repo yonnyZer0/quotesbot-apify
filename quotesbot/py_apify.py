@@ -99,8 +99,9 @@ class ApifyClient(object):
     def __init__(self, options={}):
         
         # detects and imports all APIFY env variables
-        for env in ['APIFY_ACT_ID', 'APIFY_ACT_RUN_ID', 'APIFY_USER_ID', 'APIFY_TOKEN', 'APIFY_STARTED_AT', 'APIFY_TIMEOUT_AT', 'APIFY_DEFAULT_KEY_VALUE_STORE_ID', 'APIFY_DEFAULT_DATASET_ID', 'APIFY_WATCH_FILE', 'APIFY_HEADLESS', 'APIFY_MEMORY_MBYTES', 'ACTOR_EVENTS_WS_URL']:
+        for env in ['APIFY_ACT_ID', 'APIFY_ACT_RUN_ID', 'APIFY_USER_ID', 'APIFY_TOKEN', 'APIFY_STARTED_AT', 'APIFY_TIMEOUT_AT', 'APIFY_DEFAULT_KEY_VALUE_STORE_ID', 'APIFY_DEFAULT_DATASET_ID', 'APIFY_WATCH_FILE', 'APIFY_HEADLESS', 'APIFY_MEMORY_MBYTES', 'ACTOR_EVENT_NAMES']:
             if env in os.environ:
+                print(env)
                 self.options[ env ] = os.environ.get( env )
         
         if 'APIFY_DEFAULT_KEY_VALUE_STORE_ID' in self.options:
