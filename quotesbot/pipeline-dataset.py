@@ -12,7 +12,7 @@ class QuotesbotToDataset(object):
     
     def open_spider(self, spider):
         self.apify_client = ApifyClient()
-        print( self.apify_client.options['ACTOR_EVENTS_WS_URL'] )
+        print( 'events url:' ,self.apify_client.options['ACTOR_EVENTS_WS_URL'] )
         self.items_to_push = []
         # how often to pushData to dataset and how ofter save state of crawler to kvstore
         self.chunk_size = 1    
@@ -20,9 +20,6 @@ class QuotesbotToDataset(object):
     def process_item(self, item, spider):
         self.items_to_push.append( item )
         if len( self.items_to_push ) == self.chunk_size:
-            print('_____________________________________________')
-            print()
-            print('_____________________________________________')
             self.pushData_chunk()
             
         return item
