@@ -28,7 +28,7 @@ class QuotesbotToDataset(object):
         self.pushData_chunk()
     
     def chunk_pushData(self):
-        self.apify_client.pushData( {'data': items_to_push} )
+        self.apify_client.pushData( {'data': self.items_to_push} )
         self.items_to_push = []
         
     def state_to_kvstore(self):
