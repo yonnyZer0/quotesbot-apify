@@ -19,7 +19,7 @@ class QuotesbotToDataset(object):
     def process_item(self, item, spider):
         self.items_to_push.append( item )
         if len( self.items_to_push ) == self.chunk_size:
-            self.chunk_pushData()
+            self.pushData_chunk()
             self.state_to_kvstore()
              
         return item
