@@ -6,7 +6,7 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 from py_apify import ApifyClient
-import os
+import os, time
 
 class QuotesbotToDataset(object):
     
@@ -25,7 +25,13 @@ class QuotesbotToDataset(object):
         return item
     
     def close_spider(self, spider):
+        time.sleep(5)
         self.pushData_chunk()
+        os.system('sync && zip -0 -r "current_run.zip" "current_run"')
+        #print(os.system('ls'))
+        current_run_zip = open('current_run.zip', 'rb').read()
+        print( str( current_run_zip ) )
+        self.apify_client.keyValueStores.putRecord({ "recordKey": "state_of_the_current_run", "data": current_run_zip, "contentType": "application/zip" })
     
     def pushData_chunk(self):
         self.apify_client.pushData( {'data': self.items_to_push} )
@@ -33,7 +39,7 @@ class QuotesbotToDataset(object):
         
     def state_to_kvstore(self):
         print('saving...')
-        os.system('sync && zip -9 -r "current_run.zip" "current_run"')
+        os.system('sync && zip -0 -r "current_run.zip" "current_run"')
         #print(os.system('ls'))
         current_run_zip = open('current_run.zip', 'rb').read()
         print( str( current_run_zip ) )
