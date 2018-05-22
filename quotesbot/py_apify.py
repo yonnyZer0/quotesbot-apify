@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os, json, sys
 from time import sleep
 import gzip
@@ -39,7 +41,10 @@ class ApifyClient(object):
         if type( values ) is dict or type( values ) is list:
             values = str( json.dumps( values ) ).encode()
         elif type( values ) is str:
-            values = values.encode()
+            try:
+                values = values.encode()
+            except:
+                pass
             
         req = u2.Request( url, data=values, headers=headers)    
         
