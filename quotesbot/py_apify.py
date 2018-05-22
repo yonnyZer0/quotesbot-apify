@@ -40,7 +40,7 @@ class ApifyClient(object):
         
         if type( values ) is dict or type( values ) is list:
             values = str( json.dumps( values ) ).encode()
-        elif type( values ) is str or disable_body_parser:
+        elif type( values ) is str and disable_body_parser == 0:
             values = values.encode()
             
         req = u2.Request( url, data=values, headers=headers)    
