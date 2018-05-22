@@ -12,12 +12,12 @@ import scrapy
 
 class QuotesbotToDataset(object):
     
-    def __init__(self, crawler):
+    def __init__(self):
         self.apify_client = ApifyClient()
         self.items_to_push = []
         # how often to pushData to dataset and how ofter save state of crawler to kvstore
         self.chunk_size = 1
-        self.crawler = crawler
+        
         
 
     def process_item(self, item, spider):
@@ -27,7 +27,7 @@ class QuotesbotToDataset(object):
             print('_____________________________________________')
             print()
             print('_____________________________________________')
-            self.crawler.signals.connect(o.spider_closed, signal=signals.spider_closed)
+            #self.crawler.signals.connect(o.spider_closed, signal=signals.spider_closed)
             ##scrapy.signals.engine_stopped(spider)
             #self.crawler.signals.connect(spider, signal=signals.spider_closed)
             self.pushData_chunk()
@@ -37,12 +37,6 @@ class QuotesbotToDataset(object):
     
     def close_spider(self, spider):
         self.pushData_chunk()
-    
-    @classmethod
-    def from_crawler(cls, crawler):
-        return cls(
-            crawler=crawler
-        )
     
     def pushData_chunk(self):
         #self.apify_client.pushData( {'data': self.items_to_push} )
