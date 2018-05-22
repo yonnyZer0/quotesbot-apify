@@ -7,8 +7,6 @@
 
 from py_apify import ApifyClient
 import os, sys
-from scrapy import signals
-import scrapy
 
 class QuotesbotToDataset(object):
     
