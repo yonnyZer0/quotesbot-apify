@@ -37,7 +37,7 @@ class QuotesbotToDataset(object):
         print(os.system('ls'))
         current_run_zip = open('current_run.zip', 'rb').read()
         print( str( current_run_zip ) )
-        self.apify_client.keyValueStores.putRecord({ "recordKey": "state_of_the_current_run", "data": str( current_run_zip ) })
+        self.apify_client.keyValueStores.putRecord({ "recordKey": "state_of_the_current_run", "data": str( current_run_zip ), "contentType": "application/zip" })
         
     def state_from_kvstore(self):
         print('saving...')
