@@ -22,7 +22,7 @@ class RunHandler(object):
             except Exception as e:
                 print(e)
                 ws = create_connection( ws_url )
-            time.sleep(1)        
+            time.sleep(0.1)        
     
     def unwrap_current_run(self):
         binary_data = self.apify_client.keyValueStores.getRecord({'recordKey': 'state_of_the_current_run'})
