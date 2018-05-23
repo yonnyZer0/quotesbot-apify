@@ -47,7 +47,7 @@ class RunHandler(object):
             print(e)
         
     def wrap_current_run(self):
-        os.system('sync && zip -R "current_run.zip" "current_run"')
+        os.system('zip -r "current_run.zip" "current_run"')
         current_run_zip = open('current_run.zip', 'rb').read()
         self.apify_client.keyValueStores.putRecord({ "recordKey": "state_of_the_current_run", "data": current_run_zip, "contentType": "application/zip" })
 
