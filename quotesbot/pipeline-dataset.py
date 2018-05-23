@@ -5,9 +5,10 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-from .. import py_apify
-from py_apify import ApifyClient
+
 import os, sys
+sys.path.append('/')
+from py_apify import ApifyClient
 
 class QuotesbotToDataset(object):
     
