@@ -26,7 +26,7 @@ class RunHandler(object):
                     os.system("pkill -SIGINT -f scrapy")
                     self.wrap_current_run()
                     # os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
-                    
+                    break
             except Exception as e:
                 print(e)
                 ws = create_connection( ws_url )
