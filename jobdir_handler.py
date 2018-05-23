@@ -15,7 +15,7 @@ class RunHandler(object):
         ws_url = self.apify_client.options['APIFY_ACTOR_EVENTS_WS_URL']
         while 1:
             try:
-                self.migration = json.loads( self.migration = ws.recv() )
+                self.migration = json.loads( ws.recv() )
                 print( self.migration )
                 #if self.migration:
                     
