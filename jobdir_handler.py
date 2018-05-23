@@ -40,7 +40,7 @@ class RunHandler(object):
         self.apify_client.keyValueStores.putRecord({ "recordKey": "state_of_the_current_run", "data": current_run_zip, "contentType": "application/zip" })
 
 
-handle = RunHandler()
+h = RunHandler()
 if '-start' in sys.argv:
     h.unwrap_current_run()
     os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
