@@ -38,16 +38,16 @@ class RunHandler(object):
             binary_data = self.apify_client.keyValueStores.getRecord({'recordKey': 'state_of_the_current_run'})
             print( len( binary_data ) )
             if len( binary_data ):
-                current_run_zip = open( 'current_run.zip', 'wb' )
+                current_run_zip = open( 'persist.zip', 'wb' )
                 current_run_zip.write( binary_data )
                 current_run_zip.close()
             
-            os.system('unzip current_run.zip')
+            os.system('unzip persist.zip')
         except Exception as e:
             print(e)
         
     def wrap_current_run(self):
-        os.system('zip -r -9 current_run.zip current_run')
+        os.system('zip -r -9 persist.zip persist')
         current_run_zip = open('current_run.zip', 'rb').read()
         self.apify_client.keyValueStores.putRecord({ "recordKey": "state_of_the_current_run", "data": current_run_zip, "contentType": "application/zip" })
 
@@ -61,5 +61,5 @@ if __name__ == '__main__':
         h.check_migration_or_restart()
     else:
         h.unwrap_current_run()
-        os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
+        os.popen("scrapy crawl toscrape-css --set JOBDIR=persist")
         h.check_migration_or_restart()
