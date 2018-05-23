@@ -1,4 +1,4 @@
 FROM python:2
-RUN pip install scrapy | apt-get update && apt-get install zip -yq
+RUN pip install scrapy websocket | apt-get update && apt-get install zip -yq
 ADD ./ ./
-CMD [ "scrapy", "crawl", "toscrape-css", "--set", "JOBDIR=current_run" ]
+CMD [ "python", "jobdir_handler.py" ]
