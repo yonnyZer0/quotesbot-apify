@@ -5,7 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-from py_apify import ApifyClient
+from ../py_apify import ApifyClient
 import os, sys
 
 class QuotesbotToDataset(object):
@@ -17,7 +17,7 @@ class QuotesbotToDataset(object):
         # how often to pushData to dataset and how ofter save state of crawler to kvstore
         self.chunk_size = 50
         
-        print( self.apify_client.options['APIFY_ACTOR_EVENTS_WS_URL'] )    
+        #print( self.apify_client.options['APIFY_ACTOR_EVENTS_WS_URL'] )    
 
     def process_item(self, item, spider):
         self.items_to_push.append( item )
@@ -28,6 +28,8 @@ class QuotesbotToDataset(object):
     def close_spider(self, spider):
         print('closing spider...')
         self.pushData_chunk()
+        # print( os.system('cat current_run/requests.seen') )
+        
     
     def pushData_chunk(self):
         print('pushing chunk of data...')
