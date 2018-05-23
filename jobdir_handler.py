@@ -44,12 +44,12 @@ h = RunHandler()
 if '-start' in sys.argv:
     h.unwrap_current_run()
     os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
-    h.apify_client.check_migration_or_restart()
+    h.check_migration_or_restart()
 
 elif '-restart' in sys.argv:
     h.wrap_current_run()
     os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
-    h.apify_client.check_migration_or_restart()
+    h.check_migration_or_restart()
 
 else:
-    h.apify_client.check_migration_or_restart()
+    h.check_migration_or_restart()
