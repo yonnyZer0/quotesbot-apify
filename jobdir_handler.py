@@ -33,14 +33,17 @@ class RunHandler(object):
             time.sleep(0.1)        
     
     def unwrap_current_run(self):
-        binary_data = self.apify_client.keyValueStores.getRecord({'recordKey': 'state_of_the_current_run'})
-        print( len( binary_data ) )
-        if len( binary_data ):
-            current_run_zip = open( 'current_run.zip', 'wb' )
-            current_run_zip.write( binary_data )
-            current_run_zip.close()
-        
-        os.system('unzip current_run.zip')
+        try:
+            binary_data = self.apify_client.keyValueStores.getRecord({'recordKey': 'state_of_the_current_run'})
+            print( len( binary_data ) )
+            if len( binary_data ):
+                current_run_zip = open( 'current_run.zip', 'wb' )
+                current_run_zip.write( binary_data )
+                current_run_zip.close()
+            
+            os.system('unzip current_run.zip')
+        except Exception as e:
+            print(e)
         
     def wrap_current_run(self):
         os.system('sync && zip -R "current_run.zip" "current_run"')
