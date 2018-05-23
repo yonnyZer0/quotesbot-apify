@@ -10,14 +10,22 @@ class RunHandler(object):
     def __init__(self):
         self.apify_client = ApifyClient()
         self.migration = 0
+        self.kill_interval = 600 # in seconds
     
     def check_migration_or_restart(self):
         ws_url = self.apify_client.options['APIFY_ACTOR_EVENTS_WS_URL']
+        start_time = time.time()
         while 1:
             try:
                 self.migration = json.loads( ws.recv() )
                 print( self.migration )
-                #if self.migration:
+                if "migrating" in self.migration["data"]:
+                    os.system("pkill -SIGINT -f scrapy")
+                    self.wrap_current_run()
+                elif time.time() - start_time > self.kill_inzterval:
+                    os.system("pkill -SIGINT -f scrapy")
+                    self.wrap_current_run()
+                    # os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
                     
             except Exception as e:
                 print(e)
@@ -41,15 +49,11 @@ class RunHandler(object):
 
 
 h = RunHandler()
-if '-start' in sys.argv:
+
+
+if '-test' in sys.argv:
+    h.check_migration_or_restart()
+else:
     h.unwrap_current_run()
     os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
-    h.check_migration_or_restart()
-
-elif '-restart' in sys.argv:
-    h.wrap_current_run()
-    os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
-    h.check_migration_or_restart()
-
-else:
     h.check_migration_or_restart()
