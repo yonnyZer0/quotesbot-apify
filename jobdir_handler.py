@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #! /usr/bin/env python
 
-from py_apify.py import ApifyClient
+from py_apify import ApifyClient
 from websocket import create_connection
 import os, sys, time, json
 
