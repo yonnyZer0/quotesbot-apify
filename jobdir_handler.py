@@ -52,12 +52,14 @@ class RunHandler(object):
         self.apify_client.keyValueStores.putRecord({ "recordKey": "state_of_the_current_run", "data": current_run_zip, "contentType": "application/zip" })
 
 
-h = RunHandler()
+if __name__ == '__main__':
+
+    h = RunHandler()
 
 
-if '-test' in sys.argv:
-    h.check_migration_or_restart()
-else:
-    h.unwrap_current_run()
-    os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
-    h.check_migration_or_restart()
+    if '-test' in sys.argv:
+        h.check_migration_or_restart()
+    else:
+        h.unwrap_current_run()
+        os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
+        h.check_migration_or_restart()
