@@ -56,7 +56,7 @@ class RunHandler(object):
                 current_run_zip.write( binary_data )
                 current_run_zip.close()
             
-            os.system('unzip persist.zip')
+            os.system('unzip -o persist.zip')
         except Exception as e:
             print(e)
         
