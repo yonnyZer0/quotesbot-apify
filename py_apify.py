@@ -267,7 +267,7 @@ class ApifyClient(object):
             
             url = self.defaultKeyValueStoresUrl + '/' + _options['storeId'] + '/records/' + _options['recordKey'] + self.getParams( _options, params=['token', 'disableRedirect', 'disableBodyParser'] )
             
-            return self.make_request( url, headers={'Content-Type': _options['contentType']}, method='GET', disable_body_parser=1)
+            return self.make_request( url, headers={'Accept-Encoding':'gzip;q=0'}, method='GET', disable_body_parser=1)
         
         
         def putRecord(self, options={}):
