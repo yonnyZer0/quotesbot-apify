@@ -2,7 +2,8 @@
 
 import os, json, sys
 from time import sleep
-import zlib
+import gzip
+from StringIO import StringIO
  
 if sys.version_info[0] > 2:
     import urllib.request as u2
@@ -73,8 +74,9 @@ class ApifyClient(object):
                 
             else:
                 if response.info().get('Content-Encoding') == 'gzip':
-                    print( response.read() )
-                    pagedata = zlib.decompress(response.read())
+                    buf = StringIO(response.read())
+                    f = gzip.GzipFile(fileobj=buf)
+                    pagedata = f.read()
                 
                 else:
                     pagedata = response.read()
