@@ -26,7 +26,7 @@ class RunHandler(object):
                     self.wrap_current_run()
                     break
                 elif time.time() - start_time > self.sigint_interval:
-                    os.system("pkill -SIGINT scrapy && pkill -SIGINT scrapy")
+                    os.system("pkill -SIGINT scrapy")
                     #time.sleep(10)
                     self.wrap_current_run()
                     # os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
@@ -64,5 +64,5 @@ if __name__ == '__main__':
         h.check_migration_or_restart()
     else:
         #h.unwrap_current_run()
-        os.popen("scrapy crawl toscrape-css --set JOBDIR=persist")
+        os.system("scrapy crawl toscrape-css --set JOBDIR=persist")
         h.check_migration_or_restart()
