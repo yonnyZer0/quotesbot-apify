@@ -38,6 +38,7 @@ class RunHandler(object):
                         time.sleep(1)
                     self.wrap_current_run()
                     os.system("scrapy crawl toscrape-css --set JOBDIR=persist &")
+                    start_time = time.time()
                     
                     #break
             except Exception as e:
