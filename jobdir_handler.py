@@ -25,10 +25,10 @@ class RunHandler(object):
                 
                 if os.popen("pgrep scrapy").read() == '':
                     break
-                """elif "migrating" in self.ws_read:
-                    os.system("pkill -SIGINT scrapy")
-                    self.wrap_current_run()
-                    break"""
+                #elif "migrating" in self.ws_read:
+                #    os.system("pkill -SIGINT scrapy")
+                #    self.wrap_current_run()
+                #    break
                 elif time.time() - start_time > self.sigint_interval:
                     os.system("pkill -SIGINT scrapy")
                     while 1:
