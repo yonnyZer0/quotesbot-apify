@@ -14,6 +14,7 @@ class RunHandler(object):
     
     def check_migration_or_restart(self):
         ws_url = self.apify_client.options['APIFY_ACTOR_EVENTS_WS_URL']
+        ws = create_connection( ws_url )
         start_time = time.time()
         while 1:
             try:
