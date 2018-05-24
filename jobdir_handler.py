@@ -15,6 +15,7 @@ class RunHandler(object):
     def check_migration_or_restart(self):
         ws_url = self.apify_client.options['APIFY_ACTOR_EVENTS_WS_URL']
         ws = create_connection( ws_url )
+        print( 'websocket started...' )
         start_time = time.time()
         while 1:
             try:
@@ -25,7 +26,7 @@ class RunHandler(object):
                     self.wrap_current_run()
                     break
                 elif time.time() - start_time > self.kill_interval:
-                    os.system("pkill -SIGINT scrapy")
+                    os.system("pkill -SIGINT scrapy && pkill -SIGINT scrapy")
                     #time.sleep(10)
                     self.wrap_current_run()
                     # os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
