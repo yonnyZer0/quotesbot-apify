@@ -76,6 +76,6 @@ if __name__ == '__main__':
         h.check_migration_or_restart()
     else:
         h.unwrap_current_run()
-        os.system("scrapy crawl " + h.apify_client.keyValueStores.getRecord({'recordKey': 'INPUT'}) )['scrapy_crawl_your_crawler'] + " --set JOBDIR=persist &")
+        os.system("scrapy crawl " + json.loads( h.apify_client.keyValueStores.getRecord({'recordKey': 'INPUT'}) )['scrapy_crawl_my_crawler'] + " --set JOBDIR=persist &")
         #print('started_________________________________')
         h.check_migration_or_restart()
