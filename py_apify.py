@@ -73,6 +73,7 @@ class ApifyClient(object):
                 
             else:
                 if response.info().get('Content-Encoding') == 'gzip':
+                    print( response.read() )
                     pagedata = zlib.decompress(response.read())
                 
                 else:
