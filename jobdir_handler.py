@@ -74,4 +74,5 @@ if __name__ == '__main__':
     else:
         #h.unwrap_current_run()
         os.popen("scrapy crawl toscrape-css --set JOBDIR=persist &")
+        print('started_________________________________')
         h.check_migration_or_restart()
