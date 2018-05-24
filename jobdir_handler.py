@@ -37,7 +37,7 @@ class RunHandler(object):
                         print('killed')
                         time.sleep(1)
                     self.wrap_current_run()
-                    os.popen("scrapy crawl toscrape-css --set JOBDIR=persist &")
+                    os.system("scrapy crawl toscrape-css --set JOBDIR=persist &")
                     
                     #break
             except Exception as e:
@@ -73,6 +73,6 @@ if __name__ == '__main__':
         h.check_migration_or_restart()
     else:
         #h.unwrap_current_run()
-        os.popen("scrapy crawl toscrape-css --set JOBDIR=persist &")
+        os.system("scrapy crawl toscrape-css --set JOBDIR=persist &")
         print('started_________________________________')
         h.check_migration_or_restart()
