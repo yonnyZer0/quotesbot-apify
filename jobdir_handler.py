@@ -10,18 +10,18 @@ class RunHandler(object):
     def __init__(self):
         self.apify_client = ApifyClient()
         self.migration = 0
-        self.sigint_interval = json.loads( self.apify_client.keyValueStores.getRecord({'recordKey': 'INPUT'}) )['sigint_interval'] # in seconds
-        print('sigint_interval:', self.sigint_interval)
+        self.sigint_interval = json.loads( self.apify_client.keyValueStores.getRecord({'recordKey': 'INPUT'}) )['persist_state_save_interval'] # in seconds
+        #print('sigint_interval:', self.sigint_interval)
     
     def check_migration_or_restart(self):
         ws_url = self.apify_client.options['APIFY_ACTOR_EVENTS_WS_URL']
         ws = create_connection( ws_url )
-        print( 'websocket started...' )
+        #print( 'websocket started...' )
         start_time = time.time()
         while 1:
             try:
                 self.ws_read = json.loads( ws.recv() )
-                print( self.ws_read )
+                #print( self.ws_read )
                 
                 if os.popen("pgrep scrapy").read() == '':
                     break
@@ -34,7 +34,7 @@ class RunHandler(object):
                     while 1:
                         if os.popen("pgrep scrapy").read() == '':
                             break
-                        print('killed')
+                        #print('killed')
                         time.sleep(1)
                     self.wrap_current_run()
                     self.unwrap_current_run()
@@ -43,7 +43,7 @@ class RunHandler(object):
                     
                     #break
             except Exception as e:
-                print(e)
+                #print(e)
                 ws = create_connection( ws_url )
             time.sleep(1.5)        
     
@@ -58,7 +58,8 @@ class RunHandler(object):
             
             os.system('unzip -o persist.zip')
         except Exception as e:
-            print(e)
+            #print(e)
+            pass
         
     def wrap_current_run(self):
         os.system('zip -r -9 persist.zip persist')
@@ -75,6 +76,6 @@ if __name__ == '__main__':
         h.check_migration_or_restart()
     else:
         h.unwrap_current_run()
-        os.system("scrapy crawl toscrape-css --set JOBDIR=persist &")
-        print('started_________________________________')
+        os.system("scrapy crawl " + h.apify_client.keyValueStores.getRecord({'recordKey': 'INPUT'}) )['scrapy_crawl_your_crawler'] + " --set JOBDIR=persist &")
+        #print('started_________________________________')
         h.check_migration_or_restart()
