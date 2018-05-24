@@ -37,6 +37,7 @@ class RunHandler(object):
                         print('killed')
                         time.sleep(1)
                     self.wrap_current_run()
+                    self.unwrap_current_run()
                     os.system("scrapy crawl toscrape-css --set JOBDIR=persist &")
                     start_time = time.time()
                     
