@@ -10,7 +10,7 @@ class RunHandler(object):
     def __init__(self):
         self.apify_client = ApifyClient()
         self.migration = 0
-        self.kill_interval = 3 # in seconds
+        self.kill_interval = 4 # in seconds
     
     def check_migration_or_restart(self):
         ws_url = self.apify_client.options['APIFY_ACTOR_EVENTS_WS_URL']
@@ -22,6 +22,7 @@ class RunHandler(object):
                 if "migrating" in self.migration["data"]:
                     os.system("pkill -SIGINT scrapy")
                     self.wrap_current_run()
+                    break
                 elif time.time() - start_time > self.kill_interval:
                     os.system("pkill -SIGINT scrapy")
                     time.sleep(10)
