@@ -73,7 +73,7 @@ if __name__ == '__main__':
     if '-test' in sys.argv:
         h.check_migration_or_restart()
     else:
-        #h.unwrap_current_run()
+        h.unwrap_current_run()
         os.system("scrapy crawl toscrape-css --set JOBDIR=persist &")
         print('started_________________________________')
         h.check_migration_or_restart()
