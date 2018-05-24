@@ -11,6 +11,7 @@ class RunHandler(object):
         self.apify_client = ApifyClient()
         self.migration = 0
         self.sigint_interval = json.loads( self.apify_client.keyValueStores.getRecord({'recordKey': 'INPUT'}) )['sigint_interval'] # in seconds
+        print('sigint_interval:', self.sigint_interval)
     
     def check_migration_or_restart(self):
         ws_url = self.apify_client.options['APIFY_ACTOR_EVENTS_WS_URL']
