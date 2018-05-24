@@ -20,15 +20,15 @@ class RunHandler(object):
         start_time = time.time()
         while 1:
             try:
-                self.migration = json.loads( ws.recv() )
-                print( self.migration )
+                self.ws_read = json.loads( ws.recv() )
+                print( self.ws_read )
                 
                 if os.popen("pgrep scrapy").read() == '':
                     break
-                elif "migrating" in self.migration["data"]:
+                """elif "migrating" in self.ws_read:
                     os.system("pkill -SIGINT scrapy")
                     self.wrap_current_run()
-                    break
+                    break"""
                 elif time.time() - start_time > self.sigint_interval:
                     os.system("pkill -SIGINT scrapy")
                     while 1:
