@@ -10,7 +10,7 @@ class RunHandler(object):
     def __init__(self):
         self.apify_client = ApifyClient()
         self.migration = 0
-        self.kill_interval = 12 # in seconds
+        self.kill_interval = 3 # in seconds
     
     def check_migration_or_restart(self):
         ws_url = self.apify_client.options['APIFY_ACTOR_EVENTS_WS_URL']
