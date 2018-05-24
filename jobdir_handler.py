@@ -28,7 +28,7 @@ class RunHandler(object):
                     break
                 elif time.time() - start_time > self.sigint_interval:
                     os.system("pkill -SIGINT scrapy")
-                    #time.sleep(10)
+                    time.sleep(10)
                     self.wrap_current_run()
                     # os.popen("scrapy crawl toscrape-css --set JOBDIR=current_run")
                     break
