@@ -22,7 +22,10 @@ class RunHandler(object):
             try:
                 self.migration = json.loads( ws.recv() )
                 print( self.migration )
-                if "migrating" in self.migration["data"]:
+                
+                if os.popen("pgrep scrapy").read() == '':
+                    break
+                elif "migrating" in self.migration["data"]:
                     os.system("pkill -SIGINT scrapy")
                     self.wrap_current_run()
                     break
@@ -33,8 +36,9 @@ class RunHandler(object):
                             break
                         time.sleep(1)
                     self.wrap_current_run()
-                    # os.popen("scrapy crawl toscrape-css --set JOBDIR=persist &")
-                    break
+                    os.popen("scrapy crawl toscrape-css --set JOBDIR=persist &")
+                    print('killed')
+                    #break
             except Exception as e:
                 print(e)
                 ws = create_connection( ws_url )
