@@ -10,7 +10,7 @@ class RunHandler(object):
     def __init__(self):
         self.apify_client = ApifyClient()
         self.migration = 0
-        self.kill_interval = 8 # in seconds
+        self.sigint_interval = JSON.parse( self.apify_client.keyValueStores.getRecord({'recordKey': 'INPUT'}) )['sigint_interval'] # in seconds
     
     def check_migration_or_restart(self):
         ws_url = self.apify_client.options['APIFY_ACTOR_EVENTS_WS_URL']
@@ -25,7 +25,7 @@ class RunHandler(object):
                     os.system("pkill -SIGINT scrapy")
                     self.wrap_current_run()
                     break
-                elif time.time() - start_time > self.kill_interval:
+                elif time.time() - start_time > self.sigint_interval:
                     os.system("pkill -SIGINT scrapy && pkill -SIGINT scrapy")
                     #time.sleep(10)
                     self.wrap_current_run()
