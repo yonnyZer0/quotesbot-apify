@@ -43,7 +43,7 @@ class RunHandler(object):
             except Exception as e:
                 print(e)
                 ws = create_connection( ws_url )
-            time.sleep(0.1)        
+            time.sleep(1.5)        
     
     def unwrap_current_run(self):
         try:
