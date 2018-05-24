@@ -34,10 +34,11 @@ class RunHandler(object):
                     while 1:
                         if os.popen("pgrep scrapy").read() == '':
                             break
+                        print('killed')
                         time.sleep(1)
                     self.wrap_current_run()
                     os.popen("scrapy crawl toscrape-css --set JOBDIR=persist &")
-                    print('killed')
+                    
                     #break
             except Exception as e:
                 print(e)
